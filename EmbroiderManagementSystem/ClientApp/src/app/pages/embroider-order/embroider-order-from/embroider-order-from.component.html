@@ -1,0 +1,247 @@
+<div style="position: relative;width: 100%;height: 100%;">
+    <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="orderDate">
+                အထည်ချ ရက်စွဲ</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzMd]="14" [nzLg]="14" [nzXl]="14" [nzXs]="24" [nzErrorTip]="orderDateTpl">
+                <nz-date-picker [nzFormat]="dateFormat" formControlName="orderDate" id="orderDate"></nz-date-picker>
+                <ng-template #orderDateTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')"> ချထည် ရက်စွဲဖြည့်ပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="orderType">
+                အပ်ထည်အမျိုးအစား</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzMd]="14" [nzLg]="14" [nzXl]="14" [nzXs]="24" id="orderType"
+                [nzErrorTip]="orderTypeTpl">
+                <nz-radio-group formControlName="orderType" nzButtonStyle="solid"
+                    (ngModelChange)="updateJewelValidator($event)">
+                    <label nz-radio-button nzValue="5">ဆိုင်ထည်</label>
+                    <label nz-radio-button nzValue="10">အပ်ထည်</label>
+                    <label nz-radio-button nzValue="15">ကျောက်ထည်</label>
+                </nz-radio-group>
+                <ng-template #orderTypeTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')"> အပ်ထည်အမျိုးအစား ရွေးပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="embroiderId">
+                ပန်းထိမ်ဆရာ</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="embroiderIdTpl">
+                <nz-select formControlName="embroiderId" id="embroiderId" nzAllowClear>
+                    <nz-option *ngFor="let option of embroiders" [nzValue]="option.id" [nzLabel]="option.name">
+                    </nz-option>
+                </nz-select>
+                <ng-template #embroiderIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပန်းထိမ်ဆရာ ရွေးပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="categoryId">
+                အမျိုးအစား
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="categoryIdTpl">
+                <nz-select nzShowSearch formControlName="categoryId" id="categoryId" nzAllowClear
+                    (nzOnSearch)="onSearchCategory($event)">
+                    <nz-option *ngFor="let option of searchCategoryList" [nzValue]="option.id" [nzLabel]="option.name">
+                    </nz-option>
+                </nz-select>
+                <ng-template #categoryIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">အမျိုးအစား ရွေးပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="paidGold">ရွှေ(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="paidGoldTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="paidGold"
+                    [attr.id]="'paidGold'" [nzMin]="1" [nzMax]="100000" [nzStep]="0.1">
+                </nz-input-number>
+                <ng-template #paidGoldTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပေးမည့်ရွှေ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="goldGradeId">
+                ရွှေအရည်အသွေး
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="goldGradeIdTpl">
+                <nz-select formControlName="goldGradeId" id="goldGradeId" nzAllowClear>
+                    <nz-option *ngFor="let option of goldGradeList" [nzValue]="option.id" [nzLabel]="option.name">
+                    </nz-option>
+                </nz-select>
+                <ng-template #goldGradeIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ရွှေအရည်အသွေး ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="productWeightId">
+                ရွှေထည်တခုအလေးချိန်
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="productWeightIdTpl">
+                <nz-select formControlName="productWeightId" id="productWeightId" nzAllowClear>
+                    <nz-option *ngFor="let option of productWeights" [nzValue]="option.id" [nzLabel]="option.fullName">
+                    </nz-option>
+                </nz-select>
+                <ng-template #productWeightIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ရွှေထည်တခုအလေးချိန် ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="showJewelPanel">
+            <nz-form-label [nzSm]="4" [nzMd]="4" [nzLg]="4" [nzXl]="4" [nzXs]="24" nzRequired nzFor="paidJewel">
+                ကျောက်(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="paidJewelTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="paidJewel"
+                    [attr.id]="'paidJewel'" [nzMin]="1" [nzMax]="100000" [nzStep]="0.1">
+                </nz-input-number>
+                <ng-template #paidJewelTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပေးမည့်ကျောက် ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-card nzTitle="ရွှေထည်" [nzExtra]="extraTemplate">
+            <ng-container formArrayName="golds">
+                <ng-container *ngFor="let goldFrom of golds.controls; let i = index">
+                    <div class="detail-container" [formGroupName]="i">
+                        <ng-container>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-control [nzErrorTip]="subCategoryIdTpl">
+                                        <nz-select style="min-width: 150px;" formControlName="subCategoryId"
+                                            id="subCategoryId{{i}}">
+                                            <nz-option *ngFor="let option of subCategories" [nzValue]="option.id"
+                                                [nzLabel]="option.name">
+                                            </nz-option>
+                                        </nz-select>
+                                        <ng-template #subCategoryIdTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အမျိုးအစား ရွေးပေးပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-control [nzErrorTip]="quantityTpl">
+                                        <nz-input-number style="min-width: 150px;" id="quantity{{i}}" [nzPrecision]="0"
+                                            formControlName="quantity" [nzMin]="1" [nzMax]="100000" [nzStep]="1"
+                                            [nzPlaceHolder]="'အရေအတွက်'">
+                                        </nz-input-number>
+                                        <ng-template #quantityTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အရေအတွက်ဖြည့်ပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div style="width: 1rem;">
+                                <a href="javascript:void(0);" *ngIf="i!=0" (click)="deleteGold(i)"><i nz-icon
+                                        nzType="minus-circle-o" class="dynamic-delete-button"></i></a>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </nz-card>
+
+        <nz-card *ngIf="showJewelPanel" nzTitle="ကျောက်ထည်" style="margin-top: 1rem;" [nzExtra]="extraJewelTemplate">
+            <ng-container formArrayName="jewels">
+                <ng-container
+                    *ngFor="let jewelFrom of jewels.controls; let i = index;let first = first;let last = last;">
+                    <div class="detail-container" [formGroup]="jewelFrom">
+                        <div>
+                            <nz-form-item>
+                                <nz-form-control [nzErrorTip]="descriptionTpl">
+                                    <nz-select style="min-width: 150px;" formControlName="description"
+                                        id="description{{i}}">
+                                        <nz-option *ngFor="let option of jewelList" [nzValue]="option.name"
+                                            [nzLabel]="option.name">
+                                        </nz-option>
+                                    </nz-select>
+                                    <ng-template #descriptionTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">အမျိုးအစား ရွေးပေးပါ
+                                        </ng-container>
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div>
+                            <nz-form-item>
+                                <nz-form-control [nzErrorTip]="ratioTpl">
+                                    <nz-input-number style="min-width: 150px;" [nzPrecision]="0" formControlName="ratio"
+                                        id="ratio{{i}}" [nzMin]="1" [nzMax]="100000" [nzStep]="1"
+                                        [nzPlaceHolder]="'ပါဝင်မှု'">
+                                    </nz-input-number>
+                                    <ng-template #ratioTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">ပါဝင်မှု ဖြည့်ပါ
+                                        </ng-container>
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div>
+                            <nz-form-item>
+                                <nz-form-control [nzErrorTip]="quantityTpl">
+                                    <nz-input-number style="min-width: 150px;" [attr.id]="'quantity' + i"
+                                        [nzPrecision]="0" formControlName="quantity" id="ratio{{i}}" [nzMin]="1"
+                                        [nzMax]="100000" [nzStep]="1" [nzPlaceHolder]="'အရေအတွက်'">
+                                    </nz-input-number>
+                                    <ng-template #quantityTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">အရေအတွက်ဖြည့်ပါ
+                                        </ng-container>
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div>
+                            <div style="width: 1rem;">
+                                <a href="javascript:void(0);" *ngIf="i!=0" (click)="deleteJewel(i)"><i nz-icon
+                                        nzType="minus-circle-o" class="dynamic-delete-button"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </nz-card>
+
+        <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="24">
+                <div style="display: flex;flex-wrap: wrap;flex-direction: row-reverse;padding-top: 1rem;">
+                    <div>
+                        <button nz-button (click)="cancel($event)" nzDanger>Cancel</button>
+                    </div>
+                    <div style="padding-right: 1rem;">
+                        <button nz-button [nzType]="'primary'">Save</button>
+                    </div>
+                </div>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+
+    <ng-template #extraTemplate>
+        <i nz-icon nzType="plus" *ngIf="!showJewelPanel" style="cursor: pointer;" (click)="addGold()"></i>
+    </ng-template>
+
+    <ng-template #extraJewelTemplate>
+        <i nz-icon nzType="plus" style="cursor: pointer;" (click)="addJewel()"></i>
+    </ng-template>
+    <div *ngIf="showLoading" class="loading-panel">
+        <nz-spin [nzSize]="'large'"></nz-spin>
+    </div>
+</div>

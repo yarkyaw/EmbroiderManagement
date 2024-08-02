@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmbroiderManagementSystem", "EmbroiderManagementSystem\EmbroiderManagementSystem.csproj", "{C00B2EE5-303F-44B9-ABE1-16AB41D16082}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmbroiderData", "EmbroiderData\EmbroiderData.csproj", "{CABB613A-72A1-44F8-8F95-80A23751F301}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmbroiderRepo", "EmbroiderRepo\EmbroiderRepo.csproj", "{A9BEB478-7B2A-4F19-9608-12EFADD34486}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmbroiderService", "EmbroiderService\EmbroiderService.csproj", "{4DED8530-A42B-441E-8382-0AEF5262ED87}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmbroiderManagementSystem.Tests", "EmbroiderManagementSystem.Tests\EmbroiderManagementSystem.Tests.csproj", "{97B74E95-4BE9-4E0E-A282-8D6C620521AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C00B2EE5-303F-44B9-ABE1-16AB41D16082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00B2EE5-303F-44B9-ABE1-16AB41D16082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00B2EE5-303F-44B9-ABE1-16AB41D16082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00B2EE5-303F-44B9-ABE1-16AB41D16082}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABB613A-72A1-44F8-8F95-80A23751F301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABB613A-72A1-44F8-8F95-80A23751F301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABB613A-72A1-44F8-8F95-80A23751F301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABB613A-72A1-44F8-8F95-80A23751F301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9BEB478-7B2A-4F19-9608-12EFADD34486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9BEB478-7B2A-4F19-9608-12EFADD34486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9BEB478-7B2A-4F19-9608-12EFADD34486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9BEB478-7B2A-4F19-9608-12EFADD34486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DED8530-A42B-441E-8382-0AEF5262ED87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DED8530-A42B-441E-8382-0AEF5262ED87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DED8530-A42B-441E-8382-0AEF5262ED87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DED8530-A42B-441E-8382-0AEF5262ED87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B74E95-4BE9-4E0E-A282-8D6C620521AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B74E95-4BE9-4E0E-A282-8D6C620521AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B74E95-4BE9-4E0E-A282-8D6C620521AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B74E95-4BE9-4E0E-A282-8D6C620521AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1372BAAD-18AD-481E-AAC5-27CA0B48C9E6}
+	EndGlobalSection
+EndGlobal

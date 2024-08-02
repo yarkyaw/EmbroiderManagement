@@ -1,0 +1,77 @@
+<nz-layout class="layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="" target="_blank">
+        <img src="assets\favicon_io\android-chrome-512x512.png" alt="logo">
+        <h1>Thamadi (Gold Smith)</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzTitle="Main" nzIcon="home">
+        <ul>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/welcome">Dashboard</a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Products" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/product/group">Groups</a></li>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/product/categroy">Sub Categories</a></li>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/product/subcategroy">Detail Categories</a></li>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/product/productweight">Weighing</a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Employee" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/embroider/list">Technician</a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Processes" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/embroiderorder/list">Orders</a></li>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/embroiderorder/embroiderorder">New Order</a></li>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/embroiderinvoice/list">Receives</a></li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Setting" nzIcon="setting" *ngIf="canViewUser">
+        <ul>
+          <li nz-menu-item nzMatchRouter><a routerLink="/dashboard/setting">Users</a></li>
+        </ul>
+      </li>
+      
+      <li (click)="logout()" nz-menu-item>
+        <i nz-icon nzType="logout"></i>
+        <span>Logout</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </span>
+        <ul class="nav-right">
+          <li>
+            <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+              <nz-avatar nzIcon="user"></nz-avatar>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li [routerLink]="['/dashboard/setting/userinfo',user.id]" nz-menu-item>Edit Profile</li>
+                <li (click)="logout()" nz-menu-item>Logout</li>
+              </ul>
+            </nz-dropdown-menu>
+          </li>
+        </ul>
+      </div>
+
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>Think & Taught Solution 2021</nz-footer>
+  </nz-layout>
+</nz-layout>

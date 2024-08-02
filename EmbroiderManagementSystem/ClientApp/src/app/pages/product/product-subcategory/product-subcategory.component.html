@@ -1,0 +1,90 @@
+<nz-card [nzBordered]="false" *ngIf="toogle">
+    <form nz-form [formGroup]="form">
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="categoryId">Category Name</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="categoryIdTpl">
+                <nz-select nzShowSearch formControlName="categoryId" id="categoryId" nzAllowClear (nzOnSearch)="onSearch($event)" nzPlaceHolder="Choose Category">
+                    <nz-option *ngFor="let option of searchList" [nzValue]="option.id" [nzLabel]="option.name"></nz-option>
+                </nz-select>
+                <ng-template #categoryIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Category's Name is required.
+                    </ng-container>
+                    <ng-container *ngIf="control.hasError('duplicate')">Category's Name is duplicate.
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="subCategoryCode">Category Code</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="codeTpl">
+                <input autocomplete="off" nz-input formControlName="subCategoryCode" id="subCategoryCode" />
+                <ng-template #codeTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Sub Category's Code is required.
+                    </ng-container>
+                    <ng-container *ngIf="control.hasError('duplicate')">Sub Category's Code is duplicate.
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="name">Category Name</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="nameTpl">
+                <input autocomplete="off" nz-input formControlName="name" id="name" />
+                <ng-template #nameTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Sub Category's name is required.
+                    </ng-container>
+                    <ng-container *ngIf="control.hasError('duplicate')">Sub Category's name is duplicate.
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="padding-right: 1rem;">
+                        <button nz-button nzType="primary" (click)="addSubCategory()" >Save</button>
+                    </div>
+                    <div>
+                        <button nz-button nzType="primary" (click)="cancel()" nzDanger>Cancel</button>
+                    </div>
+                </div>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-card>
+<dx-data-grid id="gridContainer" height="70%" #clientGrid [dataSource]="dataSource" [showBorders]="true" [remoteOperations]="true"
+    (onToolbarPreparing)="onToolbarPreparing($event)" [columnMinWidth]="100" [allowColumnResizing]="true">
+
+    <dxo-scrolling columnRenderingMode="virtual" mode="standard"></dxo-scrolling>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxi-column dataField="subCategoryCode" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="name" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="categoryCode" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="categoryName" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="groupCode" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="groupName" [minWidth]="150" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="groupId"  [visible]="false">
+    </dxi-column>
+    <dxi-column dataField="categoryId" [visible]="false">
+    </dxi-column>
+    <dxi-column type="buttons" cellTemplate="cellTemplate">
+    </dxi-column>
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <div style="display: inline;">
+            <div style="padding-right: 5px;">
+                <a href="javascript:void(0);" (click)="edit(data.row.data)">Edit</a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" (click)="delete(data.row.data)" style="color: #ff4d4f;">Delete</a>
+            </div>
+        </div>
+    </div>
+    <dxo-paging [pageSize]="12"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[12, 20, 30]"></dxo-pager>
+</dx-data-grid>

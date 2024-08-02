@@ -1,0 +1,317 @@
+<div style="position: relative;width: 100%;height: 100%;">
+    <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="invoiceDate">
+                အထည်အပ် ရက်စွဲ</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzMd]="14" [nzLg]="14" [nzXl]="14" [nzXs]="24" [nzErrorTip]="invoiceDateTpl">
+                <nz-date-picker [nzFormat]="dateFormat" formControlName="invoiceDate" id="invoiceDate"></nz-date-picker>
+                <ng-template #invoiceDateTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')"> အပ်ထည် ရက်စွဲဖြည့်ပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="embroiderId">
+                ပန်းထိမ်ဆရာ</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="embroiderIdTpl">
+                <nz-select formControlName="embroiderId" id="embroiderId" nzDisabled>
+                    <nz-option *ngFor="let option of embroiders" [nzValue]="option.id" [nzLabel]="option.name">
+                    </nz-option>
+                </nz-select>
+                <ng-template #embroiderIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပန်းထိမ်ဆရာ ရွေးပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="categoryId">
+                ထပ်ဆင့်အမျိုးအစား</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="categoryIdTpl">
+                <nz-select formControlName="categoryId" id="categoryId" nzDisabled>
+                    <nz-option *ngFor="let option of categories" [nzValue]="option.id" [nzLabel]="option.name">
+                    </nz-option>
+                </nz-select>
+                <ng-template #categoryIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ထပ်ဆင့်အမျိုးအစား ရွေးပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="orderDate">
+                အထည်ချ ရက်စွဲ</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzMd]="14" [nzLg]="14" [nzXl]="14" [nzXs]="24" [nzErrorTip]="orderDateTpl">
+                <nz-date-picker [nzFormat]="dateFormat" formControlName="orderDate" id="orderDate" nzDisabled>
+                </nz-date-picker>
+                <ng-template #orderDateTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')"> အပ်ထည် ရက်စွဲဖြည့်ပေးပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="orderId">
+                အထည်ချ အမှတ်စဉ်</nz-form-label>
+            <div class="left-align-label"><label>{{embroiderOrder?.orderNo}}</label> </div>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="paidGold">
+                ပေးပြီးရွှေ(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="paidGoldTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="paidGold"
+                    [attr.id]="'paidGold'" [nzMin]="1" [nzMax]="100000" [nzStep]="0.1" nzDisabled>
+                </nz-input-number>
+                <ng-template #paidGoldTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပေးမည့်ရွှေ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="productWeightId">
+                ရွှေထည်တခုအလေးချိန်
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="productWeightIdTpl">
+                <nz-select formControlName="productWeightId" id="productWeightId" nzDisabled>
+                    <nz-option *ngFor="let option of productWeights" [nzValue]="option.id" [nzLabel]="option.fullName">
+                    </nz-option>
+                </nz-select>
+                <ng-template #productWeightIdTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ရွှေထည်တခုအလေးချိန် ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="embroiderOrder && embroiderOrder.orderType==15">
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="12" nzRequired nzFor="paidJewel">
+                ပေးပြီးကျောက်(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="paidJewelTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="paidJewel"
+                    [attr.id]="'paidJewel'" [nzMin]="1" [nzMax]="100000" [nzStep]="0.1" nzDisabled>
+                </nz-input-number>
+                <ng-template #paidJewelTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပေးမည့်ကျောက် ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-card nzTitle="အပ်ထည်အသေးစိတ်" style="margin-bottom: 1rem;">
+            <ng-container formArrayName="invoiceDetails">
+                <ng-container *ngFor="let detailForm of invoiceDetails.controls; let i = index">
+                    <div class="detail-container" [formGroupName]="i">
+                        <ng-container>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-label nzFor="subCategoryId{{i}}">အပ်ထည်အမျိုးအစား
+                                    </nz-form-label>
+                                    <nz-form-control [nzErrorTip]="subCategoryIdTpl">
+                                        <nz-select style="min-width: 150px;" formControlName="subCategoryId"
+                                            id="subCategoryId{{i}}" nzDisabled>
+                                            <nz-option *ngFor="let option of subCategories" [nzValue]="option.id"
+                                                [nzLabel]="option.name">
+                                            </nz-option>
+                                        </nz-select>
+                                        <ng-template #subCategoryIdTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အမျိုးအစား ရွေးပေးပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-label nzFor="quantity{{i}}">အရေအတွက်
+                                    </nz-form-label>
+                                    <nz-form-control [nzErrorTip]="quantityTpl">
+                                        <nz-input-number style="min-width: 150px;" id="quantity{{i}}" [nzPrecision]="0"
+                                            formControlName="quantity" [nzMin]="1" [nzMax]="100000" [nzStep]="1"
+                                            (ngModelChange)="updateAllValidator()" [nzPlaceHolder]="'အရေအတွက်'"
+                                            [nzDisabled]="embroiderOrder && embroiderOrder.orderType!=5">
+                                        </nz-input-number>
+                                        <ng-template #quantityTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အရေအတွက်ဖြည့်ပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-label nzFor="actualQuantity{{i}}">အပ်သည့်အရေအတွက်
+                                    </nz-form-label>
+                                    <nz-form-control [nzErrorTip]="actualQuantityTpl">
+                                        <nz-input-number style="min-width: 150px;" id="actualQuantity{{i}}"
+                                            [nzPrecision]="0" formControlName="actualQuantity" [nzMin]="1" [nzMax]="100000"
+                                            [nzStep]="1" [nzPlaceHolder]="'အရေအတွက်'"
+                                            (ngModelChange)="calculateServiceFee()">
+                                        </nz-input-number>
+                                        <ng-template #actualQuantityTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အရေအတွက်ဖြည့်ပါ
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="!control.hasError('required') && control.hasError('quantityNotMatch')">
+                                                အထည်ချ နှင့် အထည်အပ် အရေအတွက်မတူညီပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </nz-card>
+    
+        <nz-card nzTitle="ပြန်ပြင် ထည်အသေးစိတ်" style="margin-bottom: 1rem;"
+            *ngIf="embroiderOrder && embroiderOrder.orderType==5">
+            <ng-container formArrayName="diposalDetails">
+                <ng-container *ngFor="let detailForm of diposalDetails.controls; let i = index">
+                    <div class="detail-container" [formGroupName]="i">
+                        <ng-container>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-label nzFor="subCategoryId{{i}}">ပြန်ပြင်ထည်အမျိုးအစား
+                                    </nz-form-label>
+                                    <nz-form-control [nzErrorTip]="subCategoryIdTpl">
+                                        <nz-select style="min-width: 150px;" formControlName="subCategoryId"
+                                            id="subCategoryId{{i}}" nzDisabled>
+                                            <nz-option *ngFor="let option of subCategories" [nzValue]="option.id"
+                                                [nzLabel]="option.name">
+                                            </nz-option>
+                                        </nz-select>
+                                        <ng-template #subCategoryIdTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အမျိုးအစား ရွေးပေးပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div>
+                                <nz-form-item>
+                                    <nz-form-label nzFor="actualQuantity{{i}}">ပြန်ပြင်သည့်အရေအတွက်
+                                    </nz-form-label>
+                                    <nz-form-control [nzErrorTip]="actualQuantityTpl">
+                                        <nz-input-number style="min-width: 150px;" id="actualQuantity{{i}}"
+                                            [nzPrecision]="0" formControlName="actualQuantity" [nzMin]="0" [nzMax]="100000"
+                                            [nzStep]="1" [nzPlaceHolder]="'အရေအတွက်'">
+                                        </nz-input-number>
+                                        <ng-template #actualQuantityTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">အရေအတွက်ဖြည့်ပါ
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="!control.hasError('required') && control.hasError('quantityNotMatch')">
+                                                အထည်ချ နှင့် အထည်အပ် အရေအတွက်မတူညီပါ
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </nz-card>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="serviceFeePerItem">
+                အပ်ထည် တခုအတွက်အလျော့(gm)
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="serviceFeePerItemTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="serviceFeePerItem"
+                    [attr.id]="'serviceFeePerItem'" [nzMin]="0" [nzMax]="100000" [nzStep]="0.1"
+                    (ngModelChange)="calculateServiceFee()">
+                </nz-input-number>
+                <ng-template #serviceFeePerItemTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">အပ်ထည် တခုအတွက်အလျော့ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="receivedGold">
+                ပြန်ရသည့်ရွှေ(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="receivedGoldTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="receivedGold"
+                    [attr.id]="'receivedGold'" [nzMin]="0" [nzMax]="1000" [nzStep]="1"
+                    (ngModelChange)="calculateExcessOrLack()">
+                </nz-input-number>
+                <ng-template #receivedGoldTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပြန်ရသည့်ရွှေ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="serviceFee">
+                စုစုပေါင်းအလျော့(gm)
+            </nz-form-label>
+            <nz-form-control [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" [nzErrorTip]="serviceFeeTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" nzDisabled formControlName="serviceFee"
+                    [attr.id]="'serviceFee'" [nzMin]="0" [nzMax]="100000" [nzStep]="0.1"
+                    (ngModelChange)="calculateExcessOrLack()">
+                </nz-input-number>
+                <ng-template #serviceFeeTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">စုစုပေါင်းအလျော့ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="diposalGold">ကျရွှေ(gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="diposalGoldTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="diposalGold"
+                    [attr.id]="'diposalGold'" [nzMin]="0" [nzMax]="1000" [nzStep]="1"
+                    (ngModelChange)="calculateExcessOrLack()">
+                </nz-input-number>
+                <ng-template #diposalGoldTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ကျရွှေ ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXs]="24" nzRequired nzFor="excessOrLack">
+                ပိုရွှေ(လိုရွှေ) (gm)
+            </nz-form-label>
+            <nz-form-control [nzErrorTip]="excessOrLackTpl">
+                <nz-input-number style="min-width: 150px;" [nzPrecision]="2" formControlName="excessOrLack"
+                    [attr.id]="'excessOrLack'" [nzFormatter]="formatMinus" [nzParser]="parserMinus" [nzMax]="1000"
+                    [nzStep]="1" nzDisabled>
+                </nz-input-number>
+                <ng-template #excessOrLackTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">ပိုရွှေ(လိုရွှေ) ဖြည့်ပါ
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="24">
+                <div style="display: flex;flex-wrap: wrap;flex-direction: row-reverse;padding-top: 1rem;">
+                    <div>
+                        <button nz-button (click)="cancel($event)" nzDanger>Cancel</button>
+                    </div>
+                    <div style="padding-right: 1rem;">
+                        <button nz-button [nzType]="'primary'">Save</button>
+                    </div>
+                </div>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+    <div *ngIf="showLoading" class="loading-panel">
+        <nz-spin [nzSize]="'large'"></nz-spin>
+    </div>
+    </div>

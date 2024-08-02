@@ -1,0 +1,63 @@
+<h3>အထည်ချ စာရင်း</h3>
+<dx-data-grid id="gridContainer" height="70%" #clientGrid [dataSource]="dataSource" [showBorders]="true"
+    [remoteOperations]="true" [allowColumnReordering]="true"
+    [rowAlternationEnabled]="true" (onToolbarPreparing)="onToolbarPreparing($event)" [columnMinWidth]="100"
+    [allowColumnResizing]="true">
+    <dxo-scrolling columnRenderingMode="virtual" mode="standard"></dxo-scrolling>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxi-column dataField="orderDate" caption="အထည်ချ ရက်စွဲ" [format]="{ type: 'dd/MM/yyyy' }" [minWidth]="150" dataType="date" sortOrder="asc"></dxi-column>
+    <dxi-column dataField="orderNo" [minWidth]="150" caption="အထည်ချ အမှတ်စဉ်" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="embroiderName" [minWidth]="150" caption="ပန်းထိမ်ဆရာ" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="embroiderCode" [minWidth]="150" caption="ပန်းထိမ်ဆရာ အမှတ်စဉ်" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="categoryName" [minWidth]="150" caption="ထပ်ဆင့်အမျိုးအစား" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="productWeightName" [minWidth]="150" caption="အလေးချိန်" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="orderType" [minWidth]="150" caption="အထည်ချ အမျိုးအစား" dataType="number">
+        <dxo-lookup
+            [dataSource]="lookupOrderTypeData"
+            valueExpr="id" 
+            displayExpr="name"> 
+        </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="orderStatus" caption="လုပ်ငန်းစဉ်" [minWidth]="150" dataType="number">
+        <dxo-lookup
+            [dataSource]="lookupOrderStatusData"
+            valueExpr="id" 
+            displayExpr="name"> 
+        </dxo-lookup>
+    </dxi-column>
+    <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+    <div *dxTemplate="let data of 'detail'">
+        <div class="master-detail-caption">{{ data.data.orderDate | date: 'dd/MM/yyyy'}}{{" - " +data.data.orderNo + "(" + data.data.categoryName + ")"+ " "+ data.data.embroiderName }}</div>
+        <dx-data-grid [dataSource]="data.data.orderDetails" [showBorders]="true">
+            <dxi-column dataField="description" [minWidth]="80" caption="အမျိုးအစား" dataType="string"></dxi-column>
+            <dxi-column dataField="quantity" [maxWidth]="80" caption="အရေအတွက်" dataType="number"></dxi-column>
+            <dxi-column dataField="materialType" [maxWidth]="80" caption="ပစ္စည်း" dataType="number">
+                <dxo-lookup
+                    [dataSource]="lookupMaterialTypeData"
+                    valueExpr="id" 
+                    displayExpr="name"> 
+                </dxo-lookup>
+            </dxi-column>
+            
+        </dx-data-grid>
+    </div>
+    <dxi-column type="buttons" [fixed]="true" fixedPosition="right" [minWidth]="150" cellTemplate="cellTemplate">
+    </dxi-column>
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <div style="display: flex;justify-content: space-around;">
+            <div *ngIf="data.row.data.orderStatus==5">
+                <a href="javascript:void(0);" (click)="edit(data.row.data)">ပြင်ဆင်</a>
+            </div>
+            <div *ngIf="data.row.data.orderStatus==5">
+                <a href="javascript:void(0);" style="color: #4cae4c;" (click)="addInv(data.row.data)">အထည်အပ်</a>
+            </div>
+        </div>
+    </div>
+    <dxo-paging [pageSize]="12"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[12, 20, 30]"></dxo-pager>
+</dx-data-grid>

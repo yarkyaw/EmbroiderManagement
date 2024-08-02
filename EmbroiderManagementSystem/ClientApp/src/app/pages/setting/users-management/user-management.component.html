@@ -1,0 +1,27 @@
+  <button nz-button (click)="newUser()" nzType="primary">Add</button>
+  <nz-table #basicTable [nzData]="rows" [nzScroll]="{ x: '500px',y:'45vh' }" [nzLoading]="loading">
+    <thead>
+      <tr>
+        <th nzWidth="80px" nzLeft>Name</th>
+        <th nzWidth="100px">Email</th>
+        <th nzWidth="100px">Full Name</th>
+        <th nzWidth="100px">Roles</th>
+        <th nzWidth="100px">Phone No.</th>
+        <th nzWidth="80px" nzRight>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td nzWidth="50px" nzLeft>{{ data.userName }}</td>
+        <td nzWidth="100px">{{ data.email }}</td>
+        <td nzWidth="100px">{{ data.fullName }}</td>
+        <td nzWidth="100px">{{ data.roles }}</td>
+        <td nzWidth="100px">{{ data.phoneNumber }}</td>
+        <td nzWidth="80px" nzRight>
+          <a (click)="editUser(data)">Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteUser(data)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

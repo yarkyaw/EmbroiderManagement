@@ -1,0 +1,48 @@
+.login-form {
+  max-width: 300px;
+}
+.login-form-margin {
+  margin-bottom: 16px;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}
+
+.login-main{
+    position: absolute;
+    top: 50%;
+    left: calc(50vw - 150px);
+    margin-top: -50px;
+    margin-left: -50px;
+    min-width: 300px
+}
+
+iframe {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .login-main{
+    position: absolute;
+    top: 55%;
+    left: calc(50vw - 100px);
+    margin-top: -50px;
+    margin-left: -50px;
+    min-width: 300px
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-main{
+    position: absolute;
+    top: 45%;
+    left: calc(50vw - 100px);
+    margin-top: -50px;
+    margin-left: -50px;
+    min-width: 300px
+  }
+}
+

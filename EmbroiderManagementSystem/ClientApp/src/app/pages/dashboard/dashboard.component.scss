@@ -1,0 +1,81 @@
+body{
+  overflow: hidden !important;
+}
+nz-layout{
+  overflow: hidden !important;
+}
+.layout {
+  min-height: 100vh;
+}
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+nz-content {
+  margin: 24px 16px 0;
+}
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 73vh;
+}
+nz-footer {
+  text-align: center;
+}
+//////////
+.sidebar-logo {
+  position: relative;
+  height: 64px;
+  padding-left: 24px;
+  overflow: hidden;
+  line-height: 64px;
+  background: #001529;
+  transition: all .3s;
+}
+.menu-sidebar {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+}
+.header-trigger {
+  height: 64px;
+  padding: 20px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all .3s,padding 0s;
+}
+
+.sidebar-logo img {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+}
+
+.sidebar-logo h1 {
+  display: inline-block;
+  margin: 0 0 0 20px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+  vertical-align: middle;
+}
+
+.nav-right {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: flex;
+  float: right;
+  margin-right: 16px;
+}

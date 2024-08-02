@@ -1,0 +1,42 @@
+<div style="display: flex;float: right;width: 50%;padding-bottom: 1rem;">
+  <nz-input-group nzPrefixIcon="search">
+    <input appAutofocus type="text" #first (keyup)="nameChanged($event, first)" nz-input placeholder="Search" />
+  </nz-input-group>
+</div>
+
+<nz-table #customerTable nzShowSizeChanger [nzData]="customers" [nzFrontPagination]="false" [nzLoading]="loading"
+  [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event)"
+  [nzScroll]="{ x: '500px',y:'45vh' }" (nzPageIndexChange)="changePage($event)"
+  (nzPageSizeChange)="changePageSize($event)">
+  <thead>
+    <tr>
+      <th nzColumnKey="name"  nzWidth="100px" nzLeft>Name
+        <!-- <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="first.value.length > 0" [nzDropdownMenu]="menu">
+        <i nz-icon nzType="search"></i>
+      </nz-filter-trigger> -->
+      </th>
+      <th nzColumnKey="gender">Gender</th>
+      <th nzColumnKey="email" >Email</th>
+      <th nzColumnKey="phoneNumber" >Phone</th>
+      <th nzColumnKey="dateCreated"  nzWidth="100px" nzRight>CreatedDate</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of customers">
+      <td nzLeft>{{ data.name}} </td>
+      <td>{{ data.gender }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.phoneNumber }}</td>
+      <td nzRight>{{ data.dateCreated | date: 'yyyy-MM-dd'}}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" #first (keyup)="nameChanged($event, first)" />
+    </div>
+  </div>
+</nz-dropdown-menu> -->
